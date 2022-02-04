@@ -8,5 +8,5 @@ class Photos extends Model
 {
     protected $table = 'photos';
 
-    protected $fillable = ['uri', 'public', 'height', 'width'];
+    protected $fillable = ['file', 'uri', 'public', 'height', 'width', 'size'];
 }
