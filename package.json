@@ -25,6 +25,7 @@
         "react-dropzone": "^4.2.11",
         "react-images": "^0.5.17",
         "react-photo-gallery": "^6.0.28",
+        "react-pretty-bytes": "^1.0.3",
         "react-router-dom": "^4.3.1",
         "toastr": "^2.1.4"
     }

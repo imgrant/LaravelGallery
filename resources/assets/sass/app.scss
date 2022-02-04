@@ -59,8 +59,8 @@ html,body{
 
       .image{
         position:relative;
-        height: 150px;
-        width: 150px;
+        height: 220px;
+        width: 180px;
         overflow:auto;
         display: inline-block;
         float:left;
@@ -69,6 +69,18 @@ html,body{
         img{
           width: 100%;
         }
+
+        .imageDetails{
+          font-size: small;
+        }
+
+          .imageSize{
+            float: left;
+          }
+
+          .imageDimensions{
+            float: right;
+          }
 
         .close{
           display: none;

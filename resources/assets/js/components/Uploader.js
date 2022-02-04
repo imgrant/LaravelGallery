@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import Dropzone from 'react-dropzone';
 import toastr from 'toastr';
 import {post} from 'axios';
+import PrettyBytes from 'react-pretty-bytes';
 
 export default class Uploader extends Component {
 
@@ -22,7 +23,6 @@ export default class Uploader extends Component {
         this.setState({
             images : this.state.images.concat([...images])
         });
-
     }
 
     onDropRejected(images){
@@ -115,15 +115,33 @@ export default class Uploader extends Component {
 
                         <div className="images">
                             {
-                                this.state.images.map((file) =>
+                                this.state.images.map((file) => {
+                                    var reader = new FileReader();
+                                    reader.onload = (function(entry) {
+                                        var image = new Image();
+                                        image.src = entry.target.result;
+                                        image.onload = function() {
+                                            document.getElementById(file.preview+"-width").innerText = image.width;
+                                            document.getElementById(file.preview+"-height").innerText = image.height;
+                                        }
+                                    })
+                                    reader.readAsDataURL(file);
+                                    return (
                                     <div key={file.preview} className="image">
                                         <span
                                             className="close"
                                             onClick={this.removeDroppedFile.bind(this, file.preview)}
                                         >X</span>
                                         <img src={file.preview} alt=""/>
+                                        <div className="imageDetails">
+                                            <span className="imageSize"><PrettyBytes bytes={file.size} /></span>
+                                            <span className="imageDimensions">
+                                                <span id={file.preview+"-width"}>0</span>×<span id={file.preview+"-height"}>0</span> px
+                                            </span>
+                                        </div>
                                     </div>
-                                )
+                                    );
+                                })
                             }
                         </div>
                     </Fragment>
