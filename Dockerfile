@@ -22,7 +22,7 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
 # Copy sample php.ini file into place
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
-COPY php.file-upload-limits.ini "$PHP_INI_DIR/conf.d/file-upload-limits.ini"
+COPY docker-compose/php/php.file-upload-limits.ini "$PHP_INI_DIR/conf.d/file-upload-limits.ini"
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
