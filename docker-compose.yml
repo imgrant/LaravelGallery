@@ -2,7 +2,9 @@ version: "3.7"
 
 volumes:
   db-data:
+    driver: local
   public-storage:
+    driver: local
 
 networks:
   gallery:
@@ -14,10 +16,11 @@ services:
       context: ./
       dockerfile: Dockerfile
       target: app_server
-    image: igrnt/gallery_backend
     container_name: gallery-app
     restart: unless-stopped
     working_dir: /var/www/
+    env_file:
+      - .env
     networks:
       - gallery
     volumes:
@@ -42,7 +45,6 @@ services:
       context: ./
       dockerfile: Dockerfile
       target: web_server
-    image: igrnt/gallery_frontend
     container_name: gallery-web
     restart: unless-stopped
     ports:
