@@ -1,4 +1,5 @@
 .git/
+.github/
 vendor/
 node_modules/
 public/js/

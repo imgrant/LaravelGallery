@@ -35,7 +35,7 @@ jobs:
       id: meta-frontend
       uses: docker/metadata-action@v3
       with:
-        images: igrnt/ebi-gallery-backend
+        images: igrnt/ebi-gallery-frontend
         flavor: |
             latest=true
         tags: |
