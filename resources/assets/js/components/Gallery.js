@@ -49,7 +49,7 @@ export default class Gallery extends Component {
     render() {
         let photos = this.state.images.map(image => {
             return {
-                src : '/storage/' + image.uri,
+                src : image.uri,
                 width : image.width,
                 height : image.height,
                 id :  image.id

@@ -68,7 +68,7 @@ export default class ManageGallery extends Component {
             .then(response => {
                 let images = response.data.map(image => {
                     return {
-                        src : '/storage/' + image.uri,
+                        src : image.uri,
                         width : image.width,
                         height : image.height,
                         id :  image.id

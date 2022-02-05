@@ -6,6 +6,7 @@ use App\Photos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class GalleryController extends Controller
 {
@@ -24,15 +25,18 @@ class GalleryController extends Controller
         $ext = $file->extension();
         $name = str_random(20).'.'.$ext ;
         list($width, $height) = getimagesize($file);
-        $path = Storage::disk('public')->putFileAs(
+        $size = filesize($file);
+        $path = Storage::putFileAs(
             'uploads', $file, $name
         );
         if($path){
             $create = Auth::user()->photos()->create([
-                'uri' => $path,
+                'file' => $path,
+                'uri' => Storage::url($path),
                 'public' => false,
                 'height' => $height,
-                'width' => $width
+                'width' => $width,
+                'size' => $size
             ]);
 
             if($create){
@@ -46,7 +50,7 @@ class GalleryController extends Controller
     public function deletePhoto(Request $request)
     {
         $photo = Photos::find($request->id);
-        if(Storage::disk('public')->delete($photo->uri) && $photo->delete()){
+        if(Storage::delete($photo->file) && $photo->delete()){
             return response()->json([
                 'deleted' => true
             ]);
