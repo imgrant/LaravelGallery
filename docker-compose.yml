@@ -49,6 +49,8 @@ services:
     restart: unless-stopped
     ports:
       - 80:80
+    environment:
+      FPM_HOST: "app:9000"
     networks:
       - gallery
     volumes:
