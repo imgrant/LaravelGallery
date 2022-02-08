@@ -61,8 +61,8 @@ RUN php artisan route:cache && \
     php artisan view:cache
 
 
-FROM nginx:1.17-alpine as web_server
+FROM nginx:1.20-alpine as web_server
 
-COPY docker/nginx/gallery.conf /etc/nginx/conf.d/default.conf
+COPY docker/nginx/default.conf.template /etc/nginx/templates/default.conf.template
 
 COPY --from=frontend /app/public /var/www/public
