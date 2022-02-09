@@ -32,7 +32,13 @@ class AppServiceProvider extends ServiceProvider
         Event::listen(MigrationsStarted::class, function () {
             DB::statement('SET SESSION sql_require_primary_key=0');
         });
+        Event::listen(MigrationStarted::class, function () {
+            DB::statement('SET SESSION sql_require_primary_key=0');
+        });
         Event::listen(MigrationsEnded::class, function () {
+            DB::statement('SET SESSION sql_require_primary_key=1');
+        });
+        Event::listen(MigrationEnded::class, function () {
             DB::statement('SET SESSION sql_require_primary_key=1');
         });
     }
