@@ -27,7 +27,7 @@ class GalleryController extends Controller
         list($width, $height) = getimagesize($file);
         $size = filesize($file);
         $path = Storage::putFileAs(
-            'uploads', $file, $name
+            'uploads', $file, $name, 'public'
         );
         if($path){
             $create = Auth::user()->photos()->create([
